@@ -29,9 +29,9 @@
 	<br>
 	<br>
 		<div class="flex-container" id="target">
-		  <div>row item 1</div>   
-		  <div>row item 2</div>  
-		  <div>row item 3</div>  
+		  <div class="cycler">row item 1</div>   
+		  <div class="cycler">row item 2</div>  
+		  <div class="cycler">row item 3</div>  
 		</div>
 	
 	<p> Press the button to create an new element of type div and then add it to the container.
@@ -39,6 +39,7 @@
 		<button onclick="makeNewDiv()">Add value</button>
         <button onclick="get()">Get</button>
         <button onclick="spin()">Spin</button>
+        <button onclick="swap()">Swap</button>
 	
 	
 </body>
@@ -59,14 +60,33 @@
 	}
 
 	function spin() {
-		if (document.getElementsByClassName('cycler').length > 1) {
-			let removedText = document.getElementsByClassName('cycler')[document.getElementsByClassName('cycler').length - 1].innerText
-			let removedItem = document.getElementsByClassName('cycler')[document.getElementsByClassName('cycler').length - 1].remove()
-			let ele = document.createElement('div')
-			ele.innerText = removedText
-			document.getElementById('target').insertBefore(ele, document.getElementById('target').firstChild)
+            let cyclerItems = document.getElementsByClassName("cycler")
+            if(cyclerItems.length > 1) {
+                removedItem = cyclerItems[cyclerItems.length-1]
+                cyclerItems[cyclerItems.length-1].remove()
+                let container = document.getElementById("target")
+                container.insertBefore(removedItem, container.firstChild)
+            }
+        }
+    
+        function swap() {
+			let cyclerItems = document.getElementsByClassName("cycler")
+            let container = document.getElementById("target")
+            let x= Math.floor(Math.random() * cyclerItems.length)
+            let y = Math.floor(Math.random() * cyclerItems.length)
+			while(x==y){
+				y = Math.floor(Math.random() * cyclerItems.length)
+				if(x!=y)
+					break;
+			}
+            let firstInnerText = document.getElementsByClassName("cycler")[x]
+            let secondInnerText = document.getElementsByClassName("cycler")[y]
+            if(cyclerItems.length > 1) {
+                let temp = firstInnerText.innerHTML
+                firstInnerText.innerHTML = secondInnerText.innerHTML
+                secondInnerText.innerHTML = temp
+            }
 		}
-		
-	}
+
 </script>
 </html>	
