@@ -88,6 +88,8 @@
         treasurePlace_row = parseInt(treasureLocation / 5)
         treasurePlace_column = parseInt(treasureLocation % 5)
         score += 2
+        chestCount++;
+        document.getElementById('chests').innerHTML="Number of chests checked is "+chestCount;
         document.getElementById("score").innerHTML = "Score is " + score
         if(finalinspect_row == treasurePlace_row) {
             if(finalinspect_column < treasurePlace_column) {
